@@ -10,7 +10,8 @@ const Forms = () => {
   const [firstname, setFirstname] = useState("");
   const [lastname, setLastname] = useState("");
   const [url, setURL]= useState("");
-  const [password,setPassword] = useState("");
+  const [password, setPassword] = useState("");
+  const [showPass, setshowPass] = useState(true);
 
 
   const handleEmail = (e) => {
@@ -18,13 +19,24 @@ const Forms = () => {
     setEmail(e.target.value)
   }
 
+  const handleUrl = (e) => {
+    console.log(e.target.value)
+    setURL(e.target.value)
+  }
+
   const isEmailValid = () => {
     const atIndex = email.indexOf('@')
-    if(atIndex !== -1 && email.length - atIndex > 3) {
+    if(atIndex !== -1 && email.length - atIndex >= 2) {
       return true
     }
     return false
   }
+  
+  const handleShowPass = () => {
+    setshowPass(!setshowPass);
+    console.log("click")
+  }
+  
 
 
   const handleUsername = (e) => {
@@ -50,7 +62,7 @@ const Forms = () => {
         id="email"
         required
         />
-        {!isEmailValid() && <h6 className="text-danger"> after "@" you should enter at least two more letters!  </h6>}
+        {!isEmailValid() && <h6 className="text-danger"> after "@" you should enter just two letters!  </h6>}
       </Form.Group>
 
       <Form.Group className="mb-3" >
@@ -82,27 +94,34 @@ const Forms = () => {
         <Form.Label>Image</Form.Label>
         <Form.Control type="text" placeholder="Enter Image URL" 
         accept=".jpg, .jpeg, .png, .gif"
-        pattern="https?://.+\.(jpg|jpeg|png|gif)" 
-        onChange={(e)=>setURL(e.target.value)}
+        pattern="https?://.+\.(jpg|jpeg|png|gif)"
+        onChange={handleUrl}
         value={url}
         name="url"
         id="url"/>
+        {/* {!isUrlValid() && <h6 className="text-danger"> you have to type a valid url for image! </h6>} */}
       </Form.Group>
       <Form.Label>Password</Form.Label>
       <Form.Group  className="d-flex mb-3" >
-          <Form.Control type="password" placeholder="Password" 
+          <Form.Control placeholder="Password" 
+          type = {showPass ? "password" : "text"}
+          maxLength="8"
           onChange={(e)=>setPassword(e.target.value)}
           value={password}
           id="password"/>
-          <Button  className ="" variant="dark" type="submit">
-          Show/Hidden
+          <Button  className ="" variant="dark" onClick={()=>handleShowPass()}>
+          {showPass? "show" : "hidden"} 
           </Button>
       </Form.Group>
-
-      <Button  className ="" variant="primary" type="submit">
-        Submit
-      </Button>
-
+      <div className="container">
+        <div className="row">
+          <div className="col text-center">
+          <Button  className = "text-center" variant="primary" type="submit">
+            Submit
+          </Button>
+         </div>
+        </div>
+      </div>
     </Form>
 
     </Container>
