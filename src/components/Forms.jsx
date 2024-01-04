@@ -18,6 +18,15 @@ const Forms = () => {
     setEmail(e.target.value)
   }
 
+  const isEmailValid = () => {
+    const atIndex = email.indexOf('@')
+    if(atIndex !== -1 && email.length - atIndex > 3) {
+      return true
+    }
+    return false
+  }
+
+
   const handleUsername = (e) => {
     console.log(e.target.value)
     setUsername(e.target.value)
@@ -41,6 +50,7 @@ const Forms = () => {
         id="email"
         required
         />
+        {!isEmailValid() && <h6 className="text-danger"> after "@" you should enter at least two more letters!  </h6>}
       </Form.Group>
 
       <Form.Group className="mb-3" >
@@ -71,7 +81,12 @@ const Forms = () => {
       <Form.Group className="mb-3" >
         <Form.Label>Image</Form.Label>
         <Form.Control type="text" placeholder="Enter Image URL" 
-        onChange={(e)=>setURL(e.target.value)}/>
+        accept=".jpg, .jpeg, .png, .gif"
+        pattern="https?://.+\.(jpg|jpeg|png|gif)" 
+        onChange={(e)=>setURL(e.target.value)}
+        value={url}
+        name="url"
+        id="url"/>
       </Form.Group>
       <Form.Label>Password</Form.Label>
       <Form.Group  className="d-flex mb-3" >
