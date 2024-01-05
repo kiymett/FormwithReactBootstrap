@@ -76,7 +76,14 @@ const Forms = () => {
 
   const handleFormSubmit = (e) => {
     console.log(e.target)
+    e.preventDefault()
     alert("form submit")
+    setEmail("");
+    setUsername("");
+    setFirstname("");
+    setLastname("");
+    setURL("");
+    setPassword("");
   }
 
   return (
