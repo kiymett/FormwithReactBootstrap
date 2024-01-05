@@ -31,12 +31,33 @@ const Forms = () => {
     setData ({...data, [e.target.id]: e.target.value})
   }
  
+   
+  // const handleUsername = (e) => {
+  //   console.log(e.target.value)
+  //   setUsername(e.target.value)
+  // }
+
   // const handleEmail = (e) => {
   //   console.log(e.target.value)
   //   setEmail(e.target.value)
   // }
 
+  // const handleFirstname = (e) => {
+  //   console.log(e.target.value)
+  //   setURL(e.target.value)
+  // }
+
+  // const handleLastname = (e) => {
+  //   console.log(e.target.value)
+  //   setURL(e.target.value)
+  // }
+
   // const handleUrl = (e) => {
+  //   console.log(e.target.value)
+  //   setURL(e.target.value)
+  // }
+
+  // const handlePassword = (e) => {
   //   console.log(e.target.value)
   //   setURL(e.target.value)
   // }
@@ -100,12 +121,12 @@ const Forms = () => {
 
   }
   
-  // const handleSubmit=() => {
-  //   setSubmit(true)
-  //   console.log(data)
+  const handleSubmit=() => {
+    setSubmit(true)
+    console.log(data)
   
 
-  // }
+  }
 
   return (
     <Container className ="container mt-4">
@@ -177,7 +198,7 @@ const Forms = () => {
       <div className="container">
         <div className="row">
           <div className="col text-center">
-          <Button  className = "text-center" variant="primary" type="submit" >
+          <Button  className = "text-center" variant="primary" type="submit" onClick = {handleSubmit}>
             Submit
           </Button>
 
@@ -185,7 +206,7 @@ const Forms = () => {
         </div>
       </div>
     </Form>
-    <Card  style={{ width: '18rem' }}>
+    <Card className= {submit? "display container mt-4" : "d-none"} style={{ width: '18rem' }}>
       <Card.Img variant="top" src={url}/>
       <Card.Body>
         <Card.Title className ="text-center">{username}</Card.Title>
