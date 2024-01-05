@@ -31,6 +31,30 @@ const Forms = () => {
     }
     return false
   }
+
+  const isUserName = () => {
+    const validUser = username.trim().length
+    if(validUser >= 3){
+      return true
+    }
+    return false
+  }
+
+  const isFirstName = () => {
+    const validFirst = firstname.replace(/\s/g, '').length
+    if(validFirst >= 3){
+      return true
+    }
+    return false
+  }
+
+  const isLastName = () => {
+    const validLast= lastname.replace(/\s/g, '').length
+    if(validLast >= 3){
+      return true
+    }
+    return false
+  }
   
   const isImage = () => {
    const img = /\.(jpg|jpeg|gif|png)$/.test(url);
@@ -77,6 +101,7 @@ const Forms = () => {
         onChange={handleUsername}
         value={username}
         id="username"/>
+         {isUserName() ? <span className ="text-success">ok</span> : <span className = "text-danger">please type your username</span>}
       </Form.Group>
 
       <Form.Group className="mb-3" >
@@ -85,6 +110,7 @@ const Forms = () => {
         onChange={(e)=>setFirstname(e.target.value)} 
         value={firstname}
         id="firstname"/>
+        {isFirstName() ? <span className='text-success'>ok</span> : <span className='text-danger'>please type your firstname</span>}
       </Form.Group>
       
       <Form.Group className="mb-3" >
@@ -93,6 +119,7 @@ const Forms = () => {
         onChange = {(e)=>setLastname(e.target.value)}
         value={lastname}
         id="lastname"/>
+        {isLastName() ? <span className ="text-success">ok</span> : <span className = "text-danger">please type your lastname</span>}
 
       </Form.Group>
 
