@@ -11,7 +11,7 @@ const Forms = () => {
   const [lastname, setLastname] = useState("");
   const [url, setURL]= useState("");
   const [password, setPassword] = useState("");
-  const [showPass, setshowPass] = useState(true);
+  const [showPass, setshowPass] = useState(false);
 
 
   const handleEmail = (e) => {
@@ -32,13 +32,19 @@ const Forms = () => {
     return false
   }
   
+  const isImage = () => {
+   const img = /\.(jpg|jpeg|gif|png)$/.test(url);
+   if(img){
+    return true
+  }
+  return false
+  }
   const handleShowPass = () => {
-    setshowPass(!setshowPass);
-    console.log("click")
+    setshowPass(!showPass);
+    console.log("click");
+    console.log(!showPass);
   }
   
-
-
   const handleUsername = (e) => {
     console.log(e.target.value)
     setUsername(e.target.value)
@@ -62,7 +68,7 @@ const Forms = () => {
         id="email"
         required
         />
-        {!isEmailValid() && <h6 className="text-danger"> after "@" you should enter just two letters!  </h6>}
+        {!isEmailValid() && <h6 className="text-danger"> after "@" you should enter just two letters! </h6>}
       </Form.Group>
 
       <Form.Group className="mb-3" >
@@ -94,23 +100,23 @@ const Forms = () => {
         <Form.Label>Image</Form.Label>
         <Form.Control type="text" placeholder="Enter Image URL" 
         accept=".jpg, .jpeg, .png, .gif"
-        pattern="https?://.+\.(jpg|jpeg|png|gif)"
+        // pattern="https?://.+\.(jpg|jpeg|png|gif)"
         onChange={handleUrl}
         value={url}
         name="url"
         id="url"/>
-        {/* {!isUrlValid() && <h6 className="text-danger"> you have to type a valid url for image! </h6>} */}
+        {isImage() ? <span className='text-success'>valid image</span>  : <span className='text-danger'>invalid</span> }
       </Form.Group>
       <Form.Label>Password</Form.Label>
       <Form.Group  className="d-flex mb-3" >
           <Form.Control placeholder="Password" 
-          type = {showPass ? "password" : "text"}
+          type = {showPass? "text" : "password"}
           maxLength="8"
           onChange={(e)=>setPassword(e.target.value)}
           value={password}
           id="password"/>
           <Button  className ="" variant="dark" onClick={()=>handleShowPass()}>
-          {showPass? "show" : "hidden"} 
+          {showPass? "hidden" : "show"} 
           </Button>
       </Form.Group>
       <div className="container">
