@@ -15,6 +15,7 @@ const Forms = () => {
   // const [password, setPassword] = useState("");
   const [showPass, setshowPass] = useState(false);
   const [submit, setSubmit]= useState(false);
+  const [card, setCard] = useState({});
 
   const [data, setData] = useState({
     email: "",
@@ -22,7 +23,7 @@ const Forms = () => {
     firstname:"",
     lastname:"",
     url:"",
-    password:"",
+    password:""
   });
 
   const {email, username, firstname, lastname, url, password} = data
@@ -116,7 +117,15 @@ const Forms = () => {
   const handleFormSubmit = (e) => {
     console.log(e.target)
     e.preventDefault()
-    alert("form submit");
+    alert("sent data")
+    setCard({
+      email, 
+      username,
+      firstname,
+      lastname,
+      url,
+      password
+    });
     setData ({email:"", username :"", firstname:"", lastname:"", url:"", password:""})
 
   }
@@ -206,16 +215,16 @@ const Forms = () => {
         </div>
       </div>
     </Form>
-    <Card className= {submit? "display container mt-4" : "d-none"} style={{ width: '18rem' }}>
-      <Card.Img variant="top" src={url}/>
+    <Card className= {submit ? "display container mt-4" : "d-none container mt-4"} style={{ width: '18rem' }}>
+      <Card.Img variant="top" src={card.url}/>
       <Card.Body>
-        <Card.Title className ="text-center">{username}</Card.Title>
+        <Card.Title className ="text-center">{card.username}</Card.Title>
         <Card.Text className ="text-center">
-          {firstname}  {lastname}
+          {card.firstname}  {card.lastname}
         </Card.Text>
       </Card.Body>
       <ListGroup className="list-group-flush">
-        <ListGroup.Item className ="text-center">{email}</ListGroup.Item>
+        <ListGroup.Item className ="text-center">{card.email}</ListGroup.Item>
       </ListGroup>
     </Card>
 
